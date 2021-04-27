@@ -2829,11 +2829,6 @@ extern "C" {
     pub fn webkit_javascript_result_ref(js_result: *mut WebKitJavascriptResult) -> *mut WebKitJavascriptResult;
     pub fn webkit_javascript_result_unref(js_result: *mut WebKitJavascriptResult);
 
-    // char * jsc_value_to_string (JSCValue *value);
-    pub fn jsc_value_to_string(
-        jsc_value: *mut java_script_core::JSCValue,
-    ) -> *const c_char;
-
     //=========================================================================
     // WebKitMimeInfo
     //=========================================================================

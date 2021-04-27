@@ -38,12 +38,4 @@ impl JavascriptResult {
             from_glib_none(webkit2_sys::webkit_javascript_result_get_value(self.to_glib_none().0))
         }
     }
-
-    pub fn jsc_value_to_string(jsc_value: java_script_core::Value) -> Option<glib::GString> {
-        unsafe {
-            from_glib_none(webkit2_sys::jsc_value_to_string(
-                jsc_value.to_glib_none().0,
-            ))
-        }
-    }
 }
