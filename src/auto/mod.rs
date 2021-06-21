@@ -358,7 +358,7 @@ mod flags;
 mod website_policies;
 pub use self::website_policies::WebsitePoliciesBuilder;
 pub use self::website_policies::{WebsitePolicies, NONE_WEBSITE_POLICIES};
-pub use super::website_policies::WebsitePoliciesExt;
+pub use self::website_policies::WebsitePoliciesExt;
 
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 pub use self::flags::EditorTypingAttributes;
