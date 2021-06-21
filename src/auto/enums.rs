@@ -3030,10 +3030,10 @@ impl fmt::Display for AutoplayPolicy {
 #[cfg(any(feature = "v2_28", feature = "dox"))]
 #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
 #[doc(hidden)]
-impl IntoGlib for AutoplayPolicy {
+impl ToGlib for AutoplayPolicy {
     type GlibType = webkit2_sys::WebKitAutoplayPolicy;
 
-    fn into_glib(self) -> webkit2_sys::WebKitAutoplayPolicy {
+    fn to_glib(self) -> webkit2_sys::WebKitAutoplayPolicy {
         match self {
             Self::Allow => webkit2_sys::WEBKIT_AUTOPLAY_ALLOW,
             Self::AllowWithoutSound => webkit2_sys::WEBKIT_AUTOPLAY_ALLOW_WITHOUT_SOUND,
