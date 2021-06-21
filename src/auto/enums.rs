@@ -3059,15 +3059,10 @@ impl FromGlib<webkit2_sys::WebKitAutoplayPolicy> for AutoplayPolicy {
 }
 
 #[cfg(any(feature = "v2_28", feature = "dox"))]
-#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
 impl StaticType for AutoplayPolicy {
     fn static_type() -> Type {
         unsafe { from_glib(webkit2_sys::webkit_autoplay_policy_get_type()) }
     }
-}
-
-impl glib::value::ValueType for AutoplayPolicy {
-    type Type = Self;
 }
 
 impl<'a> FromValueOptional<'a> for AutoplayPolicy {
