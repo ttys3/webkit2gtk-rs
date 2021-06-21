@@ -1794,6 +1794,35 @@ pub struct _WebKitWebsiteDataManagerPrivate(c_void);
 
 pub type WebKitWebsiteDataManagerPrivate = *mut _WebKitWebsiteDataManagerPrivate;
 
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct WebKitWebsitePoliciesClass {
+    pub parent_class: gobject::GObjectClass,
+    pub _webkit_reserved0: Option<unsafe extern "C" fn()>,
+    pub _webkit_reserved1: Option<unsafe extern "C" fn()>,
+    pub _webkit_reserved2: Option<unsafe extern "C" fn()>,
+    pub _webkit_reserved3: Option<unsafe extern "C" fn()>,
+}
+
+impl ::std::fmt::Debug for WebKitWebsitePoliciesClass {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("WebKitWebsitePoliciesClass @ {:p}", self))
+            .field("parent_class", &self.parent_class)
+            .field("_webkit_reserved0", &self._webkit_reserved0)
+            .field("_webkit_reserved1", &self._webkit_reserved1)
+            .field("_webkit_reserved2", &self._webkit_reserved2)
+            .field("_webkit_reserved3", &self._webkit_reserved3)
+            .finish()
+    }
+}
+
+#[repr(C)]
+pub struct _WebKitWebsitePoliciesPrivate(c_void);
+
+pub type WebKitWebsitePoliciesPrivate = *mut _WebKitWebsitePoliciesPrivate;
+
+
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct WebKitWindowPropertiesClass {
@@ -2519,6 +2548,24 @@ impl ::std::fmt::Debug for WebKitWebsiteDataManager {
          .finish()
     }
 }
+
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct WebKitWebsitePolicies {
+    pub parent: gobject::GObject,
+    pub priv_: *mut WebKitWebsitePoliciesPrivate,
+}
+
+impl ::std::fmt::Debug for WebKitWebsitePolicies {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        f.debug_struct(&format!("WebKitWebsitePolicies @ {:p}", self))
+            .field("parent", &self.parent)
+            .field("priv_", &self.priv_)
+            .finish()
+    }
+}
+
 
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -3355,6 +3402,10 @@ extern "C" {
     pub fn webkit_policy_decision_download(decision: *mut WebKitPolicyDecision);
     pub fn webkit_policy_decision_ignore(decision: *mut WebKitPolicyDecision);
     pub fn webkit_policy_decision_use(decision: *mut WebKitPolicyDecision);
+    pub fn webkit_policy_decision_use_with_policies(
+        decision: *mut WebKitPolicyDecision,
+        policies: *mut WebKitWebsitePolicies,
+    );
 
     //=========================================================================
     // WebKitPrintCustomWidget
