@@ -308,6 +308,11 @@ pub const WEBKIT_WEBSITE_DATA_DEVICE_ID_HASH_SALT: WebKitWebsiteDataTypes = 512;
 pub const WEBKIT_WEBSITE_DATA_HSTS_CACHE: WebKitWebsiteDataTypes = 1024;
 pub const WEBKIT_WEBSITE_DATA_ALL: WebKitWebsiteDataTypes = 2047;
 
+pub type WebKitAutoplayPolicy = c_int;
+pub const WEBKIT_AUTOPLAY_ALLOW: WebKitAutoplayPolicy = 0;
+pub const WEBKIT_AUTOPLAY_ALLOW_WITHOUT_SOUND: WebKitAutoplayPolicy = 1;
+pub const WEBKIT_AUTOPLAY_DENY: WebKitAutoplayPolicy = 2;
+
 // Callbacks
 pub type WebKitURISchemeRequestCallback = Option<unsafe extern "C" fn(*mut WebKitURISchemeRequest, gpointer)>;
 
@@ -3802,6 +3807,7 @@ extern "C" {
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     pub fn webkit_web_view_get_website_data_manager(web_view: *mut WebKitWebView) -> *mut WebKitWebsiteDataManager;
     pub fn webkit_web_view_get_window_properties(web_view: *mut WebKitWebView) -> *mut WebKitWindowProperties;
+    pub fn webkit_web_view_get_website_policies(web_view: *mut WebKitWebView) -> *mut WebKitWebsitePolicies;
     pub fn webkit_web_view_get_zoom_level(web_view: *mut WebKitWebView) -> c_double;
     pub fn webkit_web_view_go_back(web_view: *mut WebKitWebView);
     pub fn webkit_web_view_go_forward(web_view: *mut WebKitWebView);
@@ -3932,5 +3938,33 @@ extern "C" {
     pub fn webkit_user_media_permission_is_for_audio_device(request: *mut WebKitUserMediaPermissionRequest) -> gboolean;
     #[cfg(any(feature = "v2_8", feature = "dox"))]
     pub fn webkit_user_media_permission_is_for_video_device(request: *mut WebKitUserMediaPermissionRequest) -> gboolean;
+
+
+    //=========================================================================
+    // WebKitWebsitePolicies
+    //=========================================================================
+    pub fn webkit_website_policies_get_type() -> GType;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
+    pub fn webkit_website_policies_new() -> *mut WebKitWebsitePolicies;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
+    pub fn webkit_website_policies_new_with_policies(
+        first_policy_name: *const c_char,
+        ...
+    ) -> *mut WebKitWebsitePolicies;
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
+    pub fn webkit_website_policies_get_autoplay_policy(
+        policies: *mut WebKitWebsitePolicies,
+    ) -> WebKitAutoplayPolicy;
+
+    //=========================================================================
+    // WebKitAutoplayPolicy
+    //=========================================================================
+
+    #[cfg(any(feature = "v2_28", feature = "dox"))]
+    #[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
+    pub fn webkit_autoplay_policy_get_type() -> GType;
 
 }

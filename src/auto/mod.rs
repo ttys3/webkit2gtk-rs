@@ -355,6 +355,11 @@ pub use self::enums::UserStyleLevel;
 pub use self::enums::WebProcessTerminationReason;
 
 mod flags;
+mod website_policies;
+pub use self::website_policies::WebsitePoliciesBuilder;
+pub use self::website_policies::{WebsitePolicies, NONE_WEBSITE_POLICIES};
+pub use super::website_policies::WebsitePoliciesExt;
+
 #[cfg(any(feature = "v2_10", feature = "dox"))]
 pub use self::flags::EditorTypingAttributes;
 pub use self::flags::FindOptions;
@@ -422,3 +427,5 @@ pub mod traits {
     pub use super::WebsiteDataManagerExt;
     pub use super::WindowPropertiesExt;
 }
+
+pub use self::enums::AutoplayPolicy;
