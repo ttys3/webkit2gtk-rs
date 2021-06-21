@@ -9,13 +9,13 @@ use glib::translate::*;
 use glib::StaticType;
 use glib::ToValue;
 use std::fmt;
+use webkit2_sys;
 
-glib::wrapper! {
-    #[doc(alias = "WebKitWebsitePolicies")]
-    pub struct WebsitePolicies(Object<ffi::WebKitWebsitePolicies, ffi::WebKitWebsitePoliciesClass>);
+glib_wrapper! {
+    pub struct WebsitePolicies(Object<webkit2_sys::WebKitWebsitePolicies, webkit2_sys::WebKitWebsitePoliciesClass>);
 
     match fn {
-        type_ => || ffi::webkit_website_policies_get_type(),
+        get_type => || webkit2_sys::webkit_website_policies_get_type(),
     }
 }
 
@@ -23,13 +23,13 @@ impl WebsitePolicies {
     #[doc(alias = "webkit_website_policies_new")]
     pub fn new() -> WebsitePolicies {
         assert_initialized_main_thread!();
-        unsafe { from_glib_full(ffi::webkit_website_policies_new()) }
+        unsafe { from_glib_full(webkit2_sys::webkit_website_policies_new()) }
     }
 
     //#[doc(alias = "webkit_website_policies_new_with_policies")]
     //#[doc(alias = "new_with_policies")]
     //pub fn with_policies(first_policy_name: &str, : /*Unknown conversion*//*Unimplemented*/Fundamental: VarArgs) -> WebsitePolicies {
-    //    unsafe { TODO: call ffi:webkit_website_policies_new_with_policies() }
+    //    unsafe { TODO: call webkit2_sys:webkit_website_policies_new_with_policies() }
     //}
 
     // rustdoc-stripper-ignore-next

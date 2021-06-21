@@ -83,7 +83,7 @@ use WebViewSessionState;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use WebsiteDataManager;
 use WindowProperties;
-use crate::WebsitePolicies;
+use WebsitePolicies;
 
 glib_wrapper! {
     pub struct WebView(Object<webkit2_sys::WebKitWebView, webkit2_sys::WebKitWebViewClass, WebViewClass>) @extends WebViewBase, gtk::Container, gtk::Widget;
