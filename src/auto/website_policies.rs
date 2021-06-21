@@ -8,11 +8,17 @@ use glib::object::IsA;
 use glib::translate::*;
 use glib::StaticType;
 use glib::ToValue;
+use gio;
+use gio_sys;
+
+use gobject_sys;
+
 use std::fmt;
+use std::ptr;
 use webkit2_sys;
 
 glib_wrapper! {
-    pub struct WebsitePolicies(Object<webkit2_sys::WebKitWebsitePolicies, webkit2_sys::WebKitWebsitePoliciesClass>);
+    pub struct WebsitePolicies(Object<webkit2_sys::WebKitWebsitePolicies, webkit2_sys::WebKitWebsitePoliciesClass, WebsitePoliciesClass>);
 
     match fn {
         get_type => || webkit2_sys::webkit_website_policies_get_type(),
