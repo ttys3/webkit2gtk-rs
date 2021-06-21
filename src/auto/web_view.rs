@@ -83,6 +83,7 @@ use WebViewSessionState;
 #[cfg(any(feature = "v2_16", feature = "dox"))]
 use WebsiteDataManager;
 use WindowProperties;
+use WebsitePolicies;
 
 glib_wrapper! {
     pub struct WebView(Object<webkit2_sys::WebKitWebView, webkit2_sys::WebKitWebViewClass, WebViewClass>) @extends WebViewBase, gtk::Container, gtk::Widget;
@@ -155,6 +156,7 @@ pub struct WebViewBuilder {
     #[cfg(any(feature = "v2_6", feature = "dox"))]
     user_content_manager: Option<UserContentManager>,
     web_context: Option<WebContext>,
+    website_policies: Option<WebsitePolicies>,
     zoom_level: Option<f64>,
     border_width: Option<u32>,
     child: Option<gtk::Widget>,
@@ -267,6 +269,9 @@ impl WebViewBuilder {
         }
         if let Some(ref web_context) = self.web_context {
             properties.push(("web-context", web_context));
+        }
+        if let Some(ref website_policies) = self.website_policies {
+            properties.push(("website-policies", website_policies));
         }
         if let Some(ref zoom_level) = self.zoom_level {
             properties.push(("zoom-level", zoom_level));
@@ -478,6 +483,11 @@ impl WebViewBuilder {
 
     pub fn web_context<P: IsA<WebContext>>(mut self, web_context: &P) -> Self {
         self.web_context = Some(web_context.clone().upcast());
+        self
+    }
+
+    pub fn website_policies<P: IsA<WebsitePolicies>>(mut self, website_policies: &P) -> Self {
+        self.website_policies = Some(website_policies.clone().upcast());
         self
     }
 
@@ -750,6 +760,10 @@ pub trait WebViewExt: 'static {
 
     #[cfg(any(feature = "v2_16", feature = "dox"))]
     fn get_website_data_manager(&self) -> Option<WebsiteDataManager>;
+
+    #[doc(alias = "webkit_web_view_get_website_policies")]
+    fn get_website_policies(&self) -> Option<WebsitePolicies>;
+
 
     fn get_window_properties(&self) -> Option<WindowProperties>;
 
@@ -1185,6 +1199,14 @@ impl<O: IsA<WebView>> WebViewExt for O {
     fn get_user_content_manager(&self) -> Option<UserContentManager> {
         unsafe {
             from_glib_none(webkit2_sys::webkit_web_view_get_user_content_manager(self.as_ref().to_glib_none().0))
+        }
+    }
+
+    fn get_website_policies(&self) -> Option<WebsitePolicies> {
+        unsafe {
+            from_glib_none(webkit2_sys::webkit_web_view_get_website_policies(
+                self.as_ref().to_glib_none().0,
+            ))
         }
     }
 

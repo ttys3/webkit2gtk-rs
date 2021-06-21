@@ -2993,3 +2993,95 @@ impl SetValue for WebProcessTerminationReason {
     }
 }
 
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
+#[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
+#[non_exhaustive]
+#[doc(alias = "WebKitAutoplayPolicy")]
+pub enum AutoplayPolicy {
+    #[doc(alias = "WEBKIT_AUTOPLAY_ALLOW")]
+    Allow,
+    #[doc(alias = "WEBKIT_AUTOPLAY_ALLOW_WITHOUT_SOUND")]
+    AllowWithoutSound,
+    #[doc(alias = "WEBKIT_AUTOPLAY_DENY")]
+    Deny,
+    #[doc(hidden)]
+    __Unknown(i32),
+}
+
+
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
+impl fmt::Display for AutoplayPolicy {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f,
+            "AutoplayPolicy::{}",
+            match *self {
+                Self::Allow => "Allow",
+                Self::AllowWithoutSound => "AllowWithoutSound",
+                Self::Deny => "Deny",
+                _ => "Unknown",
+            }
+        )
+    }
+}
+
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
+#[doc(hidden)]
+impl ToGlib for AutoplayPolicy {
+    type GlibType = webkit2_sys::WebKitAutoplayPolicy;
+
+    fn to_glib(&self) -> webkit2_sys::WebKitAutoplayPolicy {
+        match *self {
+            Self::Allow => webkit2_sys::WEBKIT_AUTOPLAY_ALLOW,
+            Self::AllowWithoutSound => webkit2_sys::WEBKIT_AUTOPLAY_ALLOW_WITHOUT_SOUND,
+            Self::Deny => webkit2_sys::WEBKIT_AUTOPLAY_DENY,
+            Self::__Unknown(value) => value,
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+#[cfg_attr(feature = "dox", doc(cfg(feature = "v2_28")))]
+#[doc(hidden)]
+impl FromGlib<webkit2_sys::WebKitAutoplayPolicy> for AutoplayPolicy {
+    fn from_glib(value: webkit2_sys::WebKitAutoplayPolicy) -> Self {
+        skip_assert_initialized!();
+        match value {
+            webkit2_sys::WEBKIT_AUTOPLAY_ALLOW => Self::Allow,
+            webkit2_sys::WEBKIT_AUTOPLAY_ALLOW_WITHOUT_SOUND => Self::AllowWithoutSound,
+            webkit2_sys::WEBKIT_AUTOPLAY_DENY => Self::Deny,
+            value => Self::__Unknown(value),
+        }
+    }
+}
+
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+impl StaticType for AutoplayPolicy {
+    fn static_type() -> Type {
+        unsafe { from_glib(webkit2_sys::webkit_autoplay_policy_get_type()) }
+    }
+}
+
+impl<'a> FromValueOptional<'a> for AutoplayPolicy {
+    unsafe fn from_value_optional(value: &Value) -> Option<Self> {
+        Some(FromValue::from_value(value))
+    }
+}
+
+impl <'a> FromValue<'a> for AutoplayPolicy {
+    unsafe fn from_value(value: &Value) -> Self {
+        from_glib(gobject_sys::g_value_get_enum(value.to_glib_none().0))
+    }
+}
+
+#[cfg(any(feature = "v2_28", feature = "dox"))]
+impl SetValue for AutoplayPolicy {
+    unsafe fn set_value(value: &mut Value, this: &Self) {
+        unsafe {
+            gobject_sys::g_value_set_enum(value.to_glib_none_mut().0, this.to_glib());
+        }
+    }
+}
